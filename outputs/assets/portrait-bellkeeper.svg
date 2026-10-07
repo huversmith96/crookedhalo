@@ -2,13 +2,16 @@
 <title id="title">Ilyra Bellkeeper</title><desc id="desc">A warmly eccentric bellkeeper in an oversized brass bell bonnet, with expressive eyes, patched velvet coat, charms, and hand-inked hatching.</desc>
 <defs>
  <pattern id="paper" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M1 3h3m4 6h2M4 11h1" stroke="#49383c" stroke-width=".7" opacity=".24"/></pattern>
- <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><path d="M0 0v7" stroke="#302630" stroke-width="1.1" opacity=".31"/></pattern>
+ <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><path d="M0 0v7" stroke="#302630" stroke-width="1.1" opacity=".42"/></pattern>
+ <pattern id="dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#17151a" opacity=".62"/></pattern>
  <pattern id="stitch" width="14" height="10" patternUnits="userSpaceOnUse"><path d="M1 2h7" stroke="#e7b96d" stroke-width="2" stroke-linecap="round"/></pattern>
  <linearGradient id="brass" x2=".3" y2="1"><stop stop-color="#ffe7a7"/><stop offset=".43" stop-color="#d79a45"/><stop offset="1" stop-color="#8e512c"/></linearGradient>
  <linearGradient id="coat" x2=".8" y2="1"><stop stop-color="#995b4d"/><stop offset="1" stop-color="#49383c"/></linearGradient>
 </defs>
 <path fill="#d9c39a" stroke="#302630" stroke-width="11" stroke-linejoin="round" d="M46 78Q122 24 201 42t143 8q55 75 43 166t-21 147q-85 38-174 31T43 356Q6 267 17 178T46 78Z"/>
 <path fill="url(#paper)" d="M46 78Q122 24 201 42t143 8q55 75 43 166t-21 147q-85 38-174 31T43 356Q6 267 17 178T46 78Z"/>
+<!-- little turquoise wings peek from behind the bellkeeper’s crooked coat -->
+<path d="M112 274Q42 198 43 174q38 6 91 63m134 35q74-65 76-99-42 12-92 57" fill="#57c8c5" stroke="#17151a" stroke-width="12" stroke-linejoin="round"/><path d="m77 208 53 43m-26-56 57 58m143-40-53 40m70-61-68 56" fill="none" stroke="#fff0c3" stroke-width="8" stroke-linecap="round"/>
 <!-- huge patched coat and shoulder silhouette -->
 <path d="M48 379q12-82 63-111 32-19 72-18l39 9q78-2 123 51l17 63q-160 43-314 6Z" fill="url(#coat)" stroke="#302630" stroke-width="11" stroke-linejoin="round"/>
 <path d="M75 355q26-48 62-56l20 22-8 52-77 6m198-65q43 1 70 36l-69 22-25-35Z" fill="url(#hatch)" stroke="#302630" stroke-width="6"/>
@@ -18,13 +21,13 @@
 <path d="M141 239q9 34-5 51 27 28 67 23 32-4 52-33-22-7-29-40Z" fill="#e8c294" stroke="#302630" stroke-width="8"/>
 <path d="M108 151q-14-48 23-70 31-19 61 2 26-21 55 1 31 23 23 73l-20-11q-35-28-79-16-34 8-63 21Z" fill="#a85f32" stroke="#302630" stroke-width="10" stroke-linejoin="round"/>
 <!-- bell-shaped bonnet -->
-<path d="M124 127q-10-81 58-88 57-6 83 39l-4 56q-57-22-137-7Z" fill="url(#brass)" stroke="#302630" stroke-width="10" stroke-linejoin="round"/>
+<path d="M124 127q-10-81 58-88 57-6 83 39l-4 56q-57-22-137-7Z" fill="url(#brass)" stroke="#17151a" stroke-width="12" stroke-linejoin="round"/><path d="M133 117q5-56 52-62 47-5 65 32l-3 34q-58-19-114-4Z" fill="url(#dots)" opacity=".45"/>
 <path d="M148 91q30-19 72-11m-67 27q33-13 71-4" fill="none" stroke="#fff0bb" stroke-width="6" stroke-linecap="round" opacity=".78"/>
 <path d="M122 127q63-30 139-2l-8 18q-66-18-136 5Z" fill="#bd6c3c" stroke="#302630" stroke-width="7"/>
 <path d="M186 49q16 3 20 16m21 5 12 13m-92-8-9 13" fill="none" stroke="#8e512c" stroke-width="4" stroke-linecap="round"/>
 <path d="M187 135q-2 21 17 25 18-4 18-26" fill="url(#brass)" stroke="#302630" stroke-width="6"/><circle cx="205" cy="161" r="7" fill="#302630"/>
 <!-- expressive face, deliberately uneven -->
-<path d="M103 175q-4-53 39-63 54-12 85 23 21 25 5 63-14 37-48 48-39 12-66-14-17-17-15-57Z" fill="#f2d9ad" stroke="#302630" stroke-width="9"/>
+<path d="M103 175q-4-53 39-63 54-12 85 23 21 25 5 63-14 37-48 48-39 12-66-14-17-17-15-57Z" fill="#f2d9ad" stroke="#17151a" stroke-width="11"/><path d="M111 175q-2-42 34-51 45-10 74 18 17 20 5 51-11 30-42 39-33 10-55-12-15-14-16-45Z" fill="url(#dots)" opacity=".34"/>
 <path d="M111 158q18-24 43-5m22-5q22-13 42 9" fill="none" stroke="#302630" stroke-width="8" stroke-linecap="round"/>
 <ellipse cx="139" cy="171" rx="13" ry="17" fill="#fff1c7" stroke="#302630" stroke-width="5"/><ellipse cx="202" cy="173" rx="8" ry="12" fill="#fff1c7" stroke="#302630" stroke-width="5"/>
 <circle cx="142" cy="174" r="5.5" fill="#302630"/><circle cx="204" cy="176" r="4.5" fill="#302630"/>
