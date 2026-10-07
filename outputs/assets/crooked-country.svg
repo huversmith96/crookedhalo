@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A hand-inked map of the crooked country">
+<defs>
+ <pattern id="water" width="38" height="23" patternUnits="userSpaceOnUse"><path d="M1 8q10-5 19 0t18 0M-10 19q10-5 19 0t18 0" fill="none" stroke="#526c67" stroke-width="1.5" opacity=".5"/></pattern>
+ <pattern id="paper" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M1 3h4m4 6h2m-7 2 2-1" stroke="#5c493e" stroke-width=".7" opacity=".18"/></pattern>
+ <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><path d="M0 0v8" stroke="#55443d" stroke-width="1" opacity=".25"/></pattern>
+ <g id="mountain"><path d="m0 38 25-35 22 34 14-22 23 27Z" fill="#bdab84" stroke="#49383c" stroke-width="4" stroke-linejoin="round"/><path d="m15 20 10-17 12 19-10-5-7 8m26 7 8-12 10 14" fill="none" stroke="#f4e5c5" stroke-width="4" stroke-linejoin="round"/></g>
+ <g id="tree"><path d="M18 46V22m0 10L7 22m11 6 11-13" stroke="#49383c" stroke-width="4" stroke-linecap="round"/><path d="M18 3q-16 4-10 17 11 7 21-1Q30 6 18 3Z" fill="#68775a" stroke="#49383c" stroke-width="3"/></g>
+ <g id="ruin"><path d="M2 42V15q0-11 10-11t10 11v27m9 0V15q0-11 10-11t10 11v27M0 17h53M-3 43h60" fill="#c7b18a" stroke="#49383c" stroke-width="4"/><path d="M9 23h7m15 0h9" stroke="#49383c" stroke-width="3"/></g>
+</defs>
+<rect width="1200" height="620" fill="#8ca49b"/><rect width="1200" height="620" fill="url(#water)"/>
+<path d="M65 138q44-68 139-82 76-23 139 10 58 18 78 80 14 43 68 34 39-7 52-55 24-81 95-93 88-16 151 32 53 42 33 105-19 51 32 61 49 11 84-27 55-57 119-34 71 24 62 94-7 48 40 70 47 25 18 81-24 50-72 60-51 11-63 58-15 55-76 57-55 3-92-39-42-45-82-18-51 35-98 8-40-22-91-11-62 16-112-20-37-27-81-13-62 20-100-26-38-47-90-35-51 12-79-26-31-42 6-87 25-31 25-66 0-39 36-67Z" fill="#ddc99d" stroke="#49383c" stroke-width="8" stroke-linejoin="round"/>
+<path d="M65 138q44-68 139-82 76-23 139 10 58 18 78 80 14 43 68 34 39-7 52-55 24-81 95-93 88-16 151 32 53 42 33 105-19 51 32 61 49 11 84-27 55-57 119-34 71 24 62 94-7 48 40 70 47 25 18 81-24 50-72 60-51 11-63 58-15 55-76 57-55 3-92-39-42-45-82-18-51 35-98 8-40-22-91-11-62 16-112-20-37-27-81-13-62 20-100-26-38-47-90-35-51 12-79-26-31-42 6-87 25-31 25-66 0-39 36-67Z" fill="url(#paper)"/>
+<path d="M72 142q93-63 202-52t166 57q50 39 111-1t110-50q66-12 104 31t23 90q-10 49 48 62t108-12q56-24 104 8t27 83q-21 46-71 61t-56 61q-9 44-61 46t-88-35q-39-39-90-17t-95 7q-40-12-84 1t-90-14q-42-26-93-10t-88-19q-39-34-83-34t-75-27q-26-25 7-66t17-89q-8-47 43-81Z" fill="none" stroke="#866e55" stroke-width="3" stroke-dasharray="2 8" opacity=".7"/>
+<!-- crooked roads and the river that climbs uphill -->
+<path d="M122 307q72-72 183-49t186-30q78-47 174-7t167-17q87-30 178 30t94 121q-10 68-86 84t-122 63" fill="none" stroke="#f2e4c4" stroke-width="11" stroke-linecap="round" stroke-dasharray="2 17"/>
+<path d="M553 74q-14 86 21 142t-13 112q-25 44 10 92t-8 99" fill="none" stroke="#6f9891" stroke-width="9" stroke-linecap="round"/><path d="M553 74q-14 86 21 142t-13 112q-25 44 10 92t-8 99" fill="none" stroke="#e6d6ad" stroke-width="3" stroke-dasharray="3 9"/>
+<!-- stitched mountain chains -->
+<use href="#mountain" x="198" y="81"/><use href="#mountain" x="263" y="89"/><use href="#mountain" x="329" y="114"/><use href="#mountain" x="728" y="102"/><use href="#mountain" x="792" y="93"/><use href="#mountain" x="850" y="117"/><use href="#mountain" x="999" y="330"/><use href="#mountain" x="1049" y="341"/>
+<!-- suspicious groves -->
+<use href="#tree" x="106" y="228"/><use href="#tree" x="139" y="245"/><use href="#tree" x="173" y="228"/><use href="#tree" x="863" y="213"/><use href="#tree" x="892" y="230"/><use href="#tree" x="922" y="211"/><use href="#tree" x="382" y="394"/><use href="#tree" x="415" y="408"/><use href="#tree" x="449" y="389"/><use href="#tree" x="749" y="455"/><use href="#tree" x="781" y="470"/>
+<use href="#ruin" x="286" y="177"/><use href="#ruin" x="631" y="199"/><use href="#ruin" x="948" y="251"/>
+<!-- the sea has an eye and the broken halo still casts a shadow -->
+<path d="M37 467q34-25 69 0-35 25-69 0Zm21 0a13 13 0 1 0 26 0 13 13 0 1 0-26 0Z" fill="#d5bb82" stroke="#49383c" stroke-width="4"/><circle cx="71" cy="467" r="5" fill="#49383c"/>
+<path d="M992 79q28-37 59-2m-47 1q18-18 34-2" fill="none" stroke="#9a603b" stroke-width="7" stroke-linecap="round"/><path d="m1028 77 41 19-37-7" fill="#49383c" opacity=".45"/>
+<g fill="#e9d49d" stroke="#49383c" stroke-width="3"><path d="m113 88 5 14 14 4-14 4-5 14-4-14-14-4 14-4Z"/><path d="m728 52 4 10 10 3-10 3-4 10-3-10-10-3 10-3Z"/><path d="m1091 181 4 11 11 3-11 4-4 11-3-11-11-4 11-3Z"/><path d="m574 511 4 10 10 4-10 3-4 10-3-10-10-3 10-4Z"/></g>
+<path d="M31 31h1138v558H31z" fill="none" stroke="#49383c" stroke-width="5" stroke-dasharray="3 8"/>
+<g transform="translate(1124 53)" stroke="#49383c" stroke-width="4"><path d="M0 56 19 0 38 56 19 45Z" fill="#f1dfb7"/><circle cx="19" cy="44" r="5" fill="#bd792b"/></g>
+</svg>
