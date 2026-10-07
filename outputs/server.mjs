@@ -28,6 +28,60 @@ async function currentUser(req) { await dbReady(); const token = cookieValue(req
 async function makeSession(res, userId) { const token=randomBytes(32).toString('base64url'); await pool.query('INSERT INTO game_sessions(token_hash,user_id,expires_at) VALUES($1,$2,NOW()+INTERVAL \'30 days\')', [tokenHash(token),userId]); setCookie(res,token,30*24*60*60); }
 function validSave(save) { if (!save || typeof save !== 'object' || Array.isArray(save) || JSON.stringify(save).length > 1_500_000) return false; return Array.isArray(save.chars) && save.chars.length <= 20; }
 
+// Live-world prototype state is shared across connected browsers. It is held
+// in memory for the current server process; durable world state needs a DB.
+const livePlayers = new Map();
+const liveChat = [];
+const liveChronicle = [];
+const liveClients = new Map();
+const validFactions = new Set(['Radiant', 'Veil', 'Verdant']);
+function cleanText(value, max = 240) { return String(value || '').replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, max); }
+function liveSnapshot() {
+  const cutoff = Date.now() - 45_000;
+  for (const [id, player] of livePlayers) if (player.lastSeen < cutoff) livePlayers.delete(id);
+  return { players: [...livePlayers.values()].map(({ lastSeen, ...player }) => player), chat: liveChat.slice(-80), chronicle: liveChronicle.slice(-30), at: Date.now() };
+}
+function sendLive(res, data) { if (!res.destroyed) res.write(`event: world\ndata: ${JSON.stringify(data)}\n\n`); }
+function broadcastWorld() { const data = liveSnapshot(); for (const [res] of liveClients) sendLive(res, data); }
+async function liveWorldRoute(req, res, url) {
+  if (req.method === 'GET' && url.pathname === '/api/world/stream') {
+    const id = cleanText(url.searchParams.get('id'), 80);
+    const name = cleanText(url.searchParams.get('name'), 24) || 'Wayfarer';
+    const character = cleanText(url.searchParams.get('character'), 24) || name;
+    const faction = validFactions.has(url.searchParams.get('faction')) ? url.searchParams.get('faction') : 'Radiant';
+    if (!/^[A-Za-z0-9_-]{12,80}$/.test(id)) return json(res, 400, { error: 'Invalid world-session id.' });
+    const player = { id, name, character, faction, lastSeen: Date.now() };
+    livePlayers.set(id, player);
+    res.writeHead(200, { 'content-type': 'text/event-stream; charset=utf-8', 'cache-control': 'no-cache, no-transform', connection: 'keep-alive', 'x-accel-buffering': 'no' });
+    res.write('retry: 2000\n');
+    liveClients.set(res, { id });
+    sendLive(res, liveSnapshot());
+    broadcastWorld();
+    const heartbeat = setInterval(() => { if (res.destroyed) return clearInterval(heartbeat); player.lastSeen = Date.now(); res.write(': keep-alive\n\n'); }, 15_000);
+    res.on('close', () => { clearInterval(heartbeat); liveClients.delete(res); player.lastSeen = Date.now(); broadcastWorld(); });
+    return true;
+  }
+  if (req.method === 'GET' && url.pathname === '/api/world/snapshot') return json(res, 200, liveSnapshot());
+  if (req.method === 'POST' && (url.pathname === '/api/world/chat' || url.pathname === '/api/world/activity')) {
+    const id = cleanText(req.headers['x-player-id'], 80), player = livePlayers.get(id);
+    if (!player) return json(res, 401, { error: 'Join the live world first.' });
+    player.lastSeen = Date.now();
+    let data; try { data = await bodyJson(req); } catch { return json(res, 400, { error: 'Invalid message.' }); }
+    if (url.pathname.endsWith('/chat')) {
+      const text = cleanText(data.text, 240); if (!text) return json(res, 400, { error: 'Write a message first.' });
+      const channel = data.channel === 'faction' ? 'faction' : 'world';
+      const message = { id: randomBytes(8).toString('hex'), sender: player.character, faction: player.faction, channel, text, time: Date.now() };
+      liveChat.push(message); if (liveChat.length > 500) liveChat.splice(0, liveChat.length - 500);
+    } else {
+      const text = cleanText(data.text, 180); if (!text) return json(res, 400, { error: 'Activity text is empty.' });
+      liveChronicle.unshift({ id: randomBytes(8).toString('hex'), sender: player.character, faction: player.faction, text, time: Date.now() });
+      if (liveChronicle.length > 150) liveChronicle.length = 150;
+    }
+    broadcastWorld(); return json(res, 202, { ok: true });
+  }
+  return false;
+}
+
 async function authRoute(req, res, url) {
   try {
     await dbReady();
@@ -60,9 +114,10 @@ async function authRoute(req, res, url) {
 
 const server = http.createServer(async (req, res) => {
   const requestPath = new URL(req.url, `http://${req.headers.host || 'localhost'}`).pathname;
+  if (requestPath.startsWith('/api/world/')) { if (await liveWorldRoute(req, res, new URL(req.url, `http://${req.headers.host || 'localhost'}`)) !== false) return; }
   if (requestPath.startsWith('/api/account')) { if (await authRoute(req,res,new URL(req.url,`http://${req.headers.host||'localhost'}`)) !== false) return; }
   if (req.url === '/health') {
-    json(res,200,{ok:true,game:'Crooked Halo',accountsConfigured:Boolean(pool)});
+    json(res,200,{ok:true,game:'Crooked Halo',accountsConfigured:Boolean(pool),realTimeWorld:true,onlinePlayers:liveSnapshot().players.length});
     return;
   }
   if (['/assets/portrait-wayfarer.svg', '/assets/portrait-bellkeeper.svg', '/assets/crooked-country.svg'].includes(requestPath)) {
