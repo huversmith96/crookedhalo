@@ -397,5 +397,6 @@ document.addEventListener('click',e=>{let b=e.target.closest('[data-action]');if
   const oldSanctuaryRealtime=sanctuary;sanctuary=function(){return oldSanctuaryRealtime()+`<section class="card live-world-card"><div class="cardhead"><div><div class="eyebrow">The shared crooked country</div><h3>Wayfarers here now</h3></div><span class="tag live-status"><i></i><span id="live-count">Connecting…</span></span></div><div class="live-people" id="live-people"></div><h3 style="margin-top:15px">World chronicle · live</h3><div class="live-chronicle" id="live-chronicle"></div></section>`};
   const oldAddFeedRealtime=addFeed;addFeed=function(text){oldAddFeedRealtime(text);sendActivity(String(text).slice(0,180))};
   const oldRenderRealtime=render;render=function(){oldRenderRealtime();if(S.account&&S.chars?.length){joinLive();liveUpdate(snapshot)}let form=document.getElementById('chat-form');if(form&&page==='sanctuary')form.onsubmit=async e=>{e.preventDefault();let text=String(new FormData(form).get('message')||'').trim();if(!text)return;try{await livePost('/api/world/chat',{text,channel:S.chatChannel==='faction'?'faction':'world'});form.reset();document.querySelector('#chat-form input')?.focus()}catch(err){message('Live chat could not send: '+err.message)}}};
+  render();
 })();
 </script></body></html>
