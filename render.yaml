@@ -3,8 +3,8 @@ services:
     name: crooked-halo-preview
     runtime: node
     plan: free
-    buildCommand: node --check outputs/server.mjs
-    startCommand: node outputs/server.mjs
+    buildCommand: npm install --omit=dev && node --check outputs/server.mjs
+    startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: HOST

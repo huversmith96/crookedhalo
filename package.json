@@ -1,0 +1,1 @@
+{"name":"crooked-halo","private":true,"type":"module","scripts":{"start":"node outputs/server.mjs"},"dependencies":{"pg":"^8.16.3"}}
