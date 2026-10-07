@@ -4,13 +4,14 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { randomBytes, scrypt as scryptCallback, timingSafeEqual, createHash } from 'node:crypto';
 import { promisify } from 'node:util';
-import pg from 'pg';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const gameFile = path.join(root, 'crooked-halo.html');
 const port = Number(process.env.PORT) || 4173;
 const scrypt = promisify(scryptCallback);
-const pool = process.env.DATABASE_URL ? new pg.Pool({ connectionString: process.env.DATABASE_URL, ssl: process.env.DATABASE_SSL === 'disable' ? false : { rejectUnauthorized: false }, max: 5 }) : null;
+// Persistent account storage is optional. Keep the public preview runnable
+// without a database; the UI falls back to this browser's local save.
+const pool = null;
 let schemaReady;
 async function dbReady() {
   if (!pool) throw new Error('Persistent account storage is not configured yet.');
