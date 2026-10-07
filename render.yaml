@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: crooked-halo-preview
+    runtime: node
+    plan: free
+    buildCommand: node --check outputs/server.mjs
+    startCommand: node outputs/server.mjs
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
